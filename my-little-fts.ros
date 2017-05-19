@@ -1,0 +1,19 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#| Command line interface for my little FTS.
+exec ros -Q -- $0 "$@"
+|#
+
+(progn
+  (ros:ensure-asdf)
+  (ql:quickload '(my-little-fts) :silent t))
+
+(defpackage #:ros.script.my-little-fts
+  (:use #:cl))
+
+(in-package #:ros.script.my-little-fts)
+
+(defun main (&rest argv)
+  (apply #'my-little-fts:main argv))
+
+;;; vim: set ft=lisp lisp:
